@@ -49,6 +49,22 @@ Compile and run the `Main.java` file from your IDE or terminal.
 *   **User Management**: Monitor and manage all registered accounts in the system.
 *   **Inventory Control**: Toggle car availability manually if needed.
 
+## Screenshots
+
+|                                                             |                                                                     |
+|:-----------------------------------------------------------:|:-------------------------------------------------------------------:|
+|                      **Login Screen**                       |                         **Register Screen**                         |
+|              ![Login Screen](images/login.png)              |               ![Register Screen](images/register.png)               |
+|                     **User Dashboard**                      |                           **My Rentals**                            |
+|           ![User Dashboard](images/user_dash.png)           |        ![My Rentals](images/user_rental_history.png)        |
+|                     **Admin Dashboard**                     |                         **Manage Rentals**                          |
+|       ![Admin Dashboard](images/admin_dashboard.png)        |     ![Manage Rentals](images/admin_system_rentals.png)      |
+
+<p align="center">
+  <b>Manage Users</b><br>
+  <img src="images/admin_usermanage.png" width="45%">
+</p>
+
 ## Architecture
 
 The system follows a clean **3-Layered Architecture** to ensure maintainability and scalability:
