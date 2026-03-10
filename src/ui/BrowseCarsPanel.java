@@ -14,6 +14,7 @@ import java.awt.*;
 import java.util.Comparator;
 import java.util.List;
 
+// Panel for customers to browse and rent available cars
 public class BrowseCarsPanel extends JPanel {
 
     private final JTable table;
@@ -29,6 +30,7 @@ public class BrowseCarsPanel extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // Configure table with non-editable cells and typed columns for sorting
         String[] columns = {"ID", "Brand", "Model", "Year", "Daily Rate", "Availability"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
@@ -48,11 +50,10 @@ public class BrowseCarsPanel extends JPanel {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
 
-        // Sorting
         sorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(sorter);
 
-        // Top Search Panel
+        // Search interface
         JPanel topPanel = new JPanel(new BorderLayout(5, 5));
         topPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         searchField = new JTextField();
@@ -82,7 +83,7 @@ public class BrowseCarsPanel extends JPanel {
         add(topPanel, BorderLayout.NORTH);
         add(new JScrollPane(table), BorderLayout.CENTER);
         
-        // Hide ID column from view but keep it for logic
+        // Hide internal ID column
         table.getColumnModel().getColumn(0).setMinWidth(0);
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -94,6 +95,7 @@ public class BrowseCarsPanel extends JPanel {
         table.getTableHeader().setBackground(new Color(240, 240, 240));
         table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 
+        // Event listeners for searching and actions
         refreshBtn.addActionListener(e -> loadCars());
         rentBtn.addActionListener(e -> rentSelectedCar());
 
@@ -118,6 +120,7 @@ public class BrowseCarsPanel extends JPanel {
         loadCars();
     }
 
+    // Refresh car list from database
     private void loadCars() {
         tableModel.setRowCount(0);
         try {
@@ -137,6 +140,7 @@ public class BrowseCarsPanel extends JPanel {
         }
     }
 
+    // Process rental request for the selected car
     private void rentSelectedCar() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow == -1) {

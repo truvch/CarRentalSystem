@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+// Represents a rental transaction between a user and a car
 public class Rental {
 
     private int id;
@@ -10,7 +11,6 @@ public class Rental {
     private Date rentalDate;
     private String status; // ACTIVE, RETURNED
 
-    // Extra fields for UI display
     private String carDetails;
     private String userName;
 

@@ -9,6 +9,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
+// Admin panel for viewing all system rental transactions
 public class ManageRentalsPanel extends JPanel {
 
     private final JTable table;

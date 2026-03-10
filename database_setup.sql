@@ -1,6 +1,8 @@
+-- Database schema for Car Rental System
 CREATE DATABASE IF NOT EXISTS car_rental;
 USE car_rental;
 
+-- User accounts table
 CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -9,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
     role ENUM('USER', 'ADMIN') DEFAULT 'USER'
 );
 
+-- Vehicle inventory table
 CREATE TABLE IF NOT EXISTS cars (
     car_id INT AUTO_INCREMENT PRIMARY KEY,
     make VARCHAR(50) NOT NULL,
@@ -18,6 +21,7 @@ CREATE TABLE IF NOT EXISTS cars (
     is_available BOOLEAN DEFAULT TRUE
 );
 
+-- Rental transactions table
 CREATE TABLE IF NOT EXISTS rentals (
     rental_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -28,10 +32,10 @@ CREATE TABLE IF NOT EXISTS rentals (
     FOREIGN KEY (car_id) REFERENCES cars(car_id)
 );
 
--- Default admin user
+-- Initial administrative account
 INSERT IGNORE INTO users (name, username, password, role) VALUES ('Administrator', 'admin', 'admin', 'ADMIN');
 
--- Sample cars
+-- Sample vehicle data
 INSERT IGNORE INTO cars (make, model, year, daily_rate, is_available) VALUES 
 ('Toyota', 'Vios', 2022, 1500.00, TRUE),
 ('Honda', 'Civic', 2023, 2500.00, TRUE),

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class UserRepository {
 
+    // Register a new user in the system
     public void registerUser(User user) throws SQLException {
         String sql = "INSERT INTO users (name, username, password, role) VALUES (?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
@@ -21,6 +22,7 @@ public class UserRepository {
         }
     }
 
+    // Authenticate a user based on username and password
     public User login(String username, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -42,6 +44,7 @@ public class UserRepository {
         return null;
     }
 
+    // Retrieve all registered users from the database
     public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";

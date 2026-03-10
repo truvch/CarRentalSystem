@@ -19,6 +19,7 @@ public class CarRentalAgency {
         this.rentalRepository = new RentalRepository();
     }
 
+    // Add a new car with basic validation
     public void addCar(Car car) throws CarRentalException {
         validateCar(car);
         try {
@@ -28,6 +29,7 @@ public class CarRentalAgency {
         }
     }
 
+    // Retrieve the full inventory of cars
     public List<Car> displayCars() throws CarRentalException {
         try {
             return carRepository.getAllCars();
@@ -36,6 +38,7 @@ public class CarRentalAgency {
         }
     }
 
+    // Retrieve only cars that can be rented
     public List<Car> displayAvailableCars() throws CarRentalException {
         try {
             return carRepository.getAvailableCars();
@@ -44,6 +47,7 @@ public class CarRentalAgency {
         }
     }
 
+    // Process a car rental transaction for a user
     public void rentCar(int userId, int carId) throws CarRentalException {
         try {
             Car car = carRepository.getCarById(carId);
@@ -58,6 +62,7 @@ public class CarRentalAgency {
         }
     }
 
+    // Process a car return and update its availability
     public void returnCar(int rentalId) throws CarRentalException {
         try {
             int carId = rentalRepository.getCarIdByRentalId(rentalId);
@@ -70,6 +75,7 @@ public class CarRentalAgency {
         }
     }
 
+    // Search for a specific car by its brand and model
     public Car findCar(String make, String model) throws CarRentalException {
         try {
             for (Car car : carRepository.getAllCars()) {
@@ -83,6 +89,7 @@ public class CarRentalAgency {
         return null;
     }
 
+    // Perform logical checks on car details before saving
     private void validateCar(Car car) throws CarRentalException {
         if (car.getBrand() == null || car.getBrand().isEmpty()) throw new CarRentalException("Brand cannot be empty.");
         if (car.getModel() == null || car.getModel().isEmpty()) throw new CarRentalException("Model cannot be empty.");

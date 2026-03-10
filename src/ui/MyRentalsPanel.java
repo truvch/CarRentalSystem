@@ -12,6 +12,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
+// Panel for customers to view their active and past rentals
 public class MyRentalsPanel extends JPanel {
 
     private final JTable table;
@@ -50,13 +51,14 @@ public class MyRentalsPanel extends JPanel {
 
         add(new JScrollPane(table), BorderLayout.CENTER);
         
-        // Hide Rental ID column from view but keep it for logic
+        // Hide Rental ID column
         table.getColumnModel().getColumn(0).setMinWidth(0);
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(0).setPreferredWidth(0);
         
         add(buttonPanel, BorderLayout.SOUTH);
 
+        // Action listeners for rental management
         refreshBtn.addActionListener(e -> loadRentals());
         returnBtn.addActionListener(e -> returnCar());
 
@@ -80,6 +82,7 @@ public class MyRentalsPanel extends JPanel {
         }
     }
 
+    // Process car return request
     private void returnCar() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow == -1) {

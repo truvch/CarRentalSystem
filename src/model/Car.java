@@ -1,5 +1,6 @@
 package model;
 
+// Represents a vehicle in the rental fleet
 public class Car {
 
     private int id;

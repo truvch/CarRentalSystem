@@ -4,11 +4,10 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 
+// Main dashboard for administrators
 public class AdminDashboard extends JFrame {
 
-    private static final Color ADMIN_PRIMARY = new Color(45, 52, 54); // Dark Gray/Charcoal
-    private static final Color ADMIN_ACCENT = new Color(0, 184, 148);  // Teal Green
-
+    private static final Color ADMIN_PRIMARY = new Color(45, 52, 54);
     private final User currentUser;
 
     public AdminDashboard(User user) {
@@ -19,7 +18,7 @@ public class AdminDashboard extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Header Panel
+        // Header Panel setup
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(ADMIN_PRIMARY);
         topPanel.setBorder(BorderFactory.createEmptyBorder(15, 25, 15, 25));
@@ -38,7 +37,7 @@ public class AdminDashboard extends JFrame {
         infoPanel.add(welcomeLabel);
 
         JButton logoutBtn = new JButton("EXIT SYSTEM");
-        logoutBtn.setBackground(new Color(255, 71, 87)); // Coral Red
+        logoutBtn.setBackground(new Color(255, 71, 87));
         logoutBtn.setForeground(Color.WHITE);
         logoutBtn.setFocusPainted(false);
         logoutBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -53,6 +52,7 @@ public class AdminDashboard extends JFrame {
         topPanel.add(infoPanel, BorderLayout.WEST);
         topPanel.add(logoutBtn, BorderLayout.EAST);
 
+        // Tabs for management sections
         JTabbedPane tabs = new JTabbedPane();
         tabs.setFont(new Font("Segoe UI", Font.BOLD, 14));
         tabs.setBackground(Color.WHITE);

@@ -1,5 +1,6 @@
 package model;
 
+// Represents a system user (Customer or Admin)
 public class User {
 
     private int id;
@@ -37,5 +38,4 @@ public class User {
     public String getRole() { return role; }
 
     public void setRole(String role) { this.role = role; }
-
 }

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
+// Admin panel for CRUD operations on the car inventory
 public class ManageCarsPanel extends JPanel {
 
     private final JTable table;
@@ -39,9 +40,10 @@ public class ManageCarsPanel extends JPanel {
         table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
 
+        // Action buttons
         JButton addBtn = new JButton("ADD NEW CAR");
         addBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        addBtn.setBackground(new Color(0, 184, 148)); // Teal
+        addBtn.setBackground(new Color(0, 184, 148));
         addBtn.setForeground(Color.WHITE);
         addBtn.setFocusPainted(false);
         addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -52,7 +54,7 @@ public class ManageCarsPanel extends JPanel {
 
         JButton deleteBtn = new JButton("DELETE");
         deleteBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        deleteBtn.setBackground(new Color(255, 71, 87)); // Coral
+        deleteBtn.setBackground(new Color(255, 71, 87));
         deleteBtn.setForeground(Color.WHITE);
         deleteBtn.setFocusPainted(false);
         deleteBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -65,6 +67,7 @@ public class ManageCarsPanel extends JPanel {
         add(new JScrollPane(table), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
+        // Action listeners for car management
         addBtn.addActionListener(e -> showCarDialog(null));
         editBtn.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
@@ -104,6 +107,7 @@ public class ManageCarsPanel extends JPanel {
         }
     }
 
+    // Modal dialog for adding or editing car details
     private void showCarDialog(Car car) {
         JTextField brandField = new JTextField(car != null ? car.getBrand() : "");
         JTextField modelField = new JTextField(car != null ? car.getModel() : "");

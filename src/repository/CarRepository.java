@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CarRepository {
 
+    // Insert a new car record into the database
     public void addCar(Car car) throws SQLException {
         String sql = "INSERT INTO cars (make, model, year, daily_rate, is_available) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
@@ -22,6 +23,7 @@ public class CarRepository {
         }
     }
 
+    // Update an existing car's details in the database
     public void updateCar(Car car) throws SQLException {
         String sql = "UPDATE cars SET make = ?, model = ?, year = ?, daily_rate = ?, is_available = ? WHERE car_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -36,6 +38,7 @@ public class CarRepository {
         }
     }
 
+    // Retrieve all cars from the inventory
     public List<Car> getAllCars() throws SQLException {
         List<Car> cars = new ArrayList<>();
         String sql = "SELECT * FROM cars";
@@ -56,6 +59,7 @@ public class CarRepository {
         return cars;
     }
 
+    // Retrieve only cars that are currently marked as available
     public List<Car> getAvailableCars() throws SQLException {
         List<Car> cars = new ArrayList<>();
         String sql = "SELECT * FROM cars WHERE is_available = TRUE";
@@ -76,6 +80,7 @@ public class CarRepository {
         return cars;
     }
 
+    // Delete a car record from the database by ID
     public void deleteCar(int carId) throws SQLException {
         String sql = "DELETE FROM cars WHERE car_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -85,6 +90,7 @@ public class CarRepository {
         }
     }
 
+    // Toggle the availability status of a specific car
     public void setAvailability(int carId, boolean available) throws SQLException {
         String sql = "UPDATE cars SET is_available = ? WHERE car_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -95,6 +101,7 @@ public class CarRepository {
         }
     }
 
+    // Retrieve a single car's details using its unique ID
     public Car getCarById(int carId) throws SQLException {
         String sql = "SELECT * FROM cars WHERE car_id = ?";
         try (Connection conn = DBConnection.getConnection();

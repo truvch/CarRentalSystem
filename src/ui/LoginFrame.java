@@ -7,12 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
+// Main login screen for all users
 public class LoginFrame extends JFrame {
 
-    // Modern Color Palette
-    private static final Color PRIMARY_COLOR = new Color(33, 150, 243); // Blue
-    private static final Color SECONDARY_COLOR = new Color(25, 118, 210); // Darker Blue
-    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245); // Very Light Gray
+    private static final Color PRIMARY_COLOR = new Color(33, 150, 243);
+    private static final Color SECONDARY_COLOR = new Color(25, 118, 210);
+    private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color TEXT_COLOR = new Color(33, 33, 33);
     private static final Color ACCENT_COLOR = Color.WHITE;
 
@@ -29,12 +29,11 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
-        // Main background panel with themed color
+        // UI Components setup
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBackground(BACKGROUND_COLOR);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(25, 40, 25, 40));
 
-        // Header Panel with Icon/Brand color
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(BACKGROUND_COLOR);
         
@@ -54,15 +53,15 @@ public class LoginFrame extends JFrame {
         formPanel.setBackground(BACKGROUND_COLOR);
 
         usernameField = new JTextField();
-        usernameField.setPreferredSize(new Dimension(0, 45)); // Consistent with Register
-        usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Same as Register
+        usernameField.setPreferredSize(new Dimension(0, 45));
+        usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         usernameField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(200, 200, 200)),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
         passwordField = new JPasswordField();
-        passwordField.setPreferredSize(new Dimension(0, 45)); // Consistent with Register
-        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Same as Register
+        passwordField.setPreferredSize(new Dimension(0, 45));
+        passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         passwordField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(200, 200, 200)),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
@@ -109,13 +108,14 @@ public class LoginFrame extends JFrame {
 
         add(mainPanel);
 
+        // Action Listeners
         loginBtn.addActionListener(e -> login());
         registerBtn.addActionListener(e -> openRegister());
 
-        // Login on Enter key
         getRootPane().setDefaultButton(loginBtn);
     }
 
+    // Handle authentication and dashboard redirection
     private void login() {
         String username = usernameField.getText().trim();
         String password = new String(passwordField.getPassword());

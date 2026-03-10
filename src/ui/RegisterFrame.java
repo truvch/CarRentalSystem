@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
+// Screen for new user registration
 public class RegisterFrame extends JFrame {
 
-    // Modern Color Palette
     private static final Color PRIMARY_COLOR = new Color(33, 150, 243);
     private static final Color BACKGROUND_COLOR = new Color(245, 245, 245);
     private static final Color TEXT_COLOR = new Color(33, 33, 33);
@@ -28,6 +28,7 @@ public class RegisterFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+        // UI Components setup
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBackground(BACKGROUND_COLOR);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(25, 40, 25, 40));
@@ -58,14 +59,14 @@ public class RegisterFrame extends JFrame {
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
         usernameField = new JTextField();
-        usernameField.setPreferredSize(new Dimension(0, 45)); // Consistent with Login
+        usernameField.setPreferredSize(new Dimension(0, 45));
         usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         usernameField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(200, 200, 200)),
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 
         passwordField = new JPasswordField();
-        passwordField.setPreferredSize(new Dimension(0, 45)); // Consistent with Login
+        passwordField.setPreferredSize(new Dimension(0, 45));
         passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         passwordField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(200, 200, 200)),
@@ -112,6 +113,7 @@ public class RegisterFrame extends JFrame {
         registerBtn.addActionListener(e -> register());
     }
 
+    // Process registration and save to database
     private void register() {
         String name = nameField.getText().trim();
         String username = usernameField.getText().trim();

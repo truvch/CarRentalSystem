@@ -4,11 +4,10 @@ import model.User;
 import javax.swing.*;
 import java.awt.*;
 
+// Dashboard for customers to browse cars and view rentals
 public class UserDashboard extends JFrame {
 
     private static final Color PRIMARY_COLOR = new Color(33, 150, 243);
-    private static final Color SECONDARY_COLOR = new Color(25, 118, 210);
-
     private final User currentUser;
 
     public UserDashboard(User user) {
@@ -19,7 +18,7 @@ public class UserDashboard extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Sidebar or Top Panel
+        // Header Panel with user info and logout
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(PRIMARY_COLOR);
         topPanel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
@@ -38,7 +37,7 @@ public class UserDashboard extends JFrame {
         infoPanel.add(welcomeLabel);
 
         JButton logoutBtn = new JButton("LOGOUT");
-        logoutBtn.setBackground(new Color(255, 71, 87)); // Coral Red to match Admin and be visible
+        logoutBtn.setBackground(new Color(255, 71, 87));
         logoutBtn.setForeground(Color.WHITE);
         logoutBtn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         logoutBtn.setFocusPainted(false);
@@ -54,6 +53,7 @@ public class UserDashboard extends JFrame {
         topPanel.add(infoPanel, BorderLayout.WEST);
         topPanel.add(logoutBtn, BorderLayout.EAST);
 
+        // Tabbed interface for browsing and history
         JTabbedPane tabs = new JTabbedPane();
         tabs.setFont(new Font("Segoe UI", Font.BOLD, 14));
         tabs.setBackground(Color.WHITE);

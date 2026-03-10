@@ -9,18 +9,13 @@ public class DBConnection {
     private static final String USER = "root";
     private static final String PASS = "root";
 
+    // Establish and return a connection to the MySQL database
     public static Connection getConnection() {
-
         try {
-
             return DriverManager.getConnection(URL, USER, PASS);
-
         } catch (Exception e) {
-
-            System.out.println("Database not connected yet.");
+            System.out.println("Database connection failed. Please check your credentials and server status.");
             return null;
-
         }
     }
-
 }

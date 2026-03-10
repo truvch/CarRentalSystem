@@ -9,6 +9,7 @@ import java.util.List;
 
 public class RentalRepository {
 
+    // Add a new rental record to the database
     public void addRental(Rental rental) throws SQLException {
         String sql = "INSERT INTO rentals (user_id, car_id, status) VALUES (?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
@@ -20,6 +21,7 @@ public class RentalRepository {
         }
     }
 
+    // Fetch all rentals associated with a specific user
     public List<Rental> getRentalsByUserId(int userId) throws SQLException {
         List<Rental> rentals = new ArrayList<>();
         String sql = "SELECT r.*, c.make, c.model FROM rentals r " +
@@ -45,6 +47,7 @@ public class RentalRepository {
         return rentals;
     }
 
+    // Fetch all rental records in the system (Admin only)
     public List<Rental> getAllRentals() throws SQLException {
         List<Rental> rentals = new ArrayList<>();
         String sql = "SELECT r.*, c.make, c.model, u.name FROM rentals r " +
@@ -69,6 +72,7 @@ public class RentalRepository {
         return rentals;
     }
 
+    // Mark a rental as returned by updating its status
     public void returnCar(int rentalId) throws SQLException {
         String sql = "UPDATE rentals SET status = 'RETURNED' WHERE rental_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -78,6 +82,7 @@ public class RentalRepository {
         }
     }
     
+    // Retrieve the car ID associated with a specific rental record
     public int getCarIdByRentalId(int rentalId) throws SQLException {
         String sql = "SELECT car_id FROM rentals WHERE rental_id = ?";
         try (Connection conn = DBConnection.getConnection();

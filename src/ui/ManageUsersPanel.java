@@ -9,6 +9,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
+// Admin panel for monitoring registered users
 public class ManageUsersPanel extends JPanel {
 
     private final JTable table;
