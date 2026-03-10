@@ -10,7 +10,7 @@ CarRentalSystem is a professional desktop application developed in Java using th
 *   **MySQL Server**: Version 8.0 or higher.
 *   **MySQL Connector/J**: The JDBC driver (included in the `lib` folder).
 
-<!-- ### Database Setup
+### Database Setup
 
 1.  Open your MySQL terminal or management tool (like MySQL Workbench).
 2.  Execute the provided `database_setup.sql` script to create the database, tables, and initial data:
@@ -28,7 +28,6 @@ private static final String URL = "jdbc:mysql://localhost:3306/car_rental";
 private static final String USER = "your_username";
 private static final String PASS = "your_password";
 ```
--->
 
 ### Build and Run
 
