@@ -1,0 +1,325 @@
+@startuml CarRentalSystem
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+' ─────────────────────────────────────────────
+' Entry Point
+' ─────────────────────────────────────────────
+class Main {
+    +{static} main(String[] args) : void
+}
+
+' ─────────────────────────────────────────────
+' Package: model
+' ─────────────────────────────────────────────
+package model {
+
+    class User {
+        -id : int
+        -name : String
+        -username : String
+        -password : String
+        -role : String
+        +User()
+        +User(int id, String name, String username, String password, String role)
+        +getId() : int
+        +setId(int id) : void
+        +getName() : String
+        +setName(String name) : void
+        +getUsername() : String
+        +setUsername(String username) : void
+        +getPassword() : String
+        +setPassword(String password) : void
+        +getRole() : String
+        +setRole(String role) : void
+    }
+
+    class Car {
+        -id : int
+        -brand : String
+        -model : String
+        -year : int
+        -dailyRate : double
+        -available : boolean
+        +Car()
+        +Car(int id, String brand, String model, int year, double dailyRate, boolean available)
+        +getId() : int
+        +setId(int id) : void
+        +getBrand() : String
+        +setBrand(String brand) : void
+        +getModel() : String
+        +setModel(String model) : void
+        +getYear() : int
+        +setYear(int year) : void
+        +getDailyRate() : double
+        +setDailyRate(double dailyRate) : void
+        +isAvailable() : boolean
+        +setAvailable(boolean available) : void
+    }
+
+    class Rental {
+        -id : int
+        -userId : int
+        -carId : int
+        -rentalDate : Date
+        -status : String
+        -carDetails : String
+        -userName : String
+        +Rental()
+        +Rental(int id, int userId, int carId, Date rentalDate, String status)
+        +getId() : int
+        +setId(int id) : void
+        +getUserId() : int
+        +setUserId(int userId) : void
+        +getCarId() : int
+        +setCarId(int carId) : void
+        +getRentalDate() : Date
+        +setRentalDate(Date rentalDate) : void
+        +getStatus() : String
+        +setStatus(String status) : void
+        +getCarDetails() : String
+        +setCarDetails(String carDetails) : void
+        +getUserName() : String
+        +setUserName(String userName) : void
+    }
+}
+
+' ─────────────────────────────────────────────
+' Package: exception
+' ─────────────────────────────────────────────
+package exception {
+
+    class CarRentalException {
+        +CarRentalException(String message)
+    }
+    CarRentalException --|> Exception
+}
+
+' ─────────────────────────────────────────────
+' Package: database
+' ─────────────────────────────────────────────
+package database {
+
+    class DBConnection {
+        -{static} URL : String
+        -{static} USER : String
+        -{static} PASS : String
+        +{static} getConnection() : Connection
+    }
+}
+
+' ─────────────────────────────────────────────
+' Package: repository
+' ─────────────────────────────────────────────
+package repository {
+
+    class UserRepository {
+        +registerUser(User user) : void
+        +login(String username, String password) : User
+        +getAllUsers() : List<User>
+    }
+
+    class CarRepository {
+        +addCar(Car car) : void
+        +updateCar(Car car) : void
+        +getAllCars() : List<Car>
+        +getAvailableCars() : List<Car>
+        +deleteCar(int carId) : void
+        +setAvailability(int carId, boolean available) : void
+        +getCarById(int carId) : Car
+    }
+
+    class RentalRepository {
+        +addRental(Rental rental) : void
+        +getRentalsByUserId(int userId) : List<Rental>
+        +getAllRentals() : List<Rental>
+        +returnCar(int rentalId) : void
+        +getCarIdByRentalId(int rentalId) : int
+    }
+}
+
+' ─────────────────────────────────────────────
+' Package: service
+' ─────────────────────────────────────────────
+package service {
+
+    class CarRentalAgency {
+        -carRepository : CarRepository
+        -rentalRepository : RentalRepository
+        +CarRentalAgency()
+        +addCar(Car car) : void
+        +displayCars() : List<Car>
+        +displayAvailableCars() : List<Car>
+        +rentCar(int userId, int carId) : void
+        +returnCar(int rentalId) : void
+        +findCar(String make, String model) : Car
+        -validateCar(Car car) : void
+    }
+}
+
+' ─────────────────────────────────────────────
+' Package: ui
+' ─────────────────────────────────────────────
+package ui {
+
+    class LoginFrame {
+        -{static} PRIMARY_COLOR : Color
+        -{static} SECONDARY_COLOR : Color
+        -{static} BACKGROUND_COLOR : Color
+        -{static} TEXT_COLOR : Color
+        -{static} ACCENT_COLOR : Color
+        -usernameField : JTextField
+        -passwordField : JPasswordField
+        -userRepository : UserRepository
+        +LoginFrame()
+        -login() : void
+        -openRegister() : void
+    }
+
+    class RegisterFrame {
+        -{static} PRIMARY_COLOR : Color
+        -{static} BACKGROUND_COLOR : Color
+        -{static} TEXT_COLOR : Color
+        -{static} ACCENT_COLOR : Color
+        -nameField : JTextField
+        -usernameField : JTextField
+        -passwordField : JPasswordField
+        -userRepository : UserRepository
+        +RegisterFrame()
+        -register() : void
+    }
+
+    class UserDashboard {
+        -{static} PRIMARY_COLOR : Color
+        -currentUser : User
+        +UserDashboard(User user)
+    }
+
+    class AdminDashboard {
+        -{static} ADMIN_PRIMARY : Color
+        -currentUser : User
+        +AdminDashboard(User user)
+    }
+
+    class BrowseCarsPanel {
+        -table : JTable
+        -tableModel : DefaultTableModel
+        -sorter : TableRowSorter
+        -searchField : JTextField
+        -agency : CarRentalAgency
+        -currentUser : User
+        +BrowseCarsPanel(User user)
+        -loadCars() : void
+        -rentSelectedCar() : void
+    }
+
+    class MyRentalsPanel {
+        -table : JTable
+        -tableModel : DefaultTableModel
+        -rentalRepository : RentalRepository
+        -agency : CarRentalAgency
+        -currentUser : User
+        +MyRentalsPanel(User user)
+        -loadRentals() : void
+        -returnCar() : void
+    }
+
+    class ManageCarsPanel {
+        -table : JTable
+        -tableModel : DefaultTableModel
+        -agency : CarRentalAgency
+        -carRepository : CarRepository
+        +ManageCarsPanel()
+        -loadCars() : void
+        -showCarDialog(Car car) : void
+        -deleteCar() : void
+    }
+
+    class ManageRentalsPanel {
+        -table : JTable
+        -tableModel : DefaultTableModel
+        -rentalRepository : RentalRepository
+        +ManageRentalsPanel()
+        -loadAllRentals() : void
+    }
+
+    class ManageUsersPanel {
+        -table : JTable
+        -tableModel : DefaultTableModel
+        -userRepository : UserRepository
+        +ManageUsersPanel()
+        -loadUsers() : void
+    }
+
+    LoginFrame --|> JFrame
+    RegisterFrame --|> JFrame
+    UserDashboard --|> JFrame
+    AdminDashboard --|> JFrame
+    BrowseCarsPanel --|> JPanel
+    MyRentalsPanel --|> JPanel
+    ManageCarsPanel --|> JPanel
+    ManageRentalsPanel --|> JPanel
+    ManageUsersPanel --|> JPanel
+}
+
+' ─────────────────────────────────────────────
+' Relationships
+' ─────────────────────────────────────────────
+
+' Entry point
+Main ..> LoginFrame : uses
+
+' UI → UI navigation
+LoginFrame ..> RegisterFrame : opens
+LoginFrame ..> UserDashboard : opens
+LoginFrame ..> AdminDashboard : opens
+
+' UI → Repository
+LoginFrame o-- UserRepository
+RegisterFrame o-- UserRepository
+ManageUsersPanel o-- UserRepository
+ManageRentalsPanel o-- RentalRepository
+MyRentalsPanel o-- RentalRepository
+
+' UI → Service
+BrowseCarsPanel o-- CarRentalAgency
+MyRentalsPanel o-- CarRentalAgency
+ManageCarsPanel o-- CarRentalAgency
+
+' UI → Repository (direct)
+ManageCarsPanel o-- CarRepository
+
+' UI → Model
+UserDashboard o-- User
+AdminDashboard o-- User
+BrowseCarsPanel o-- User
+MyRentalsPanel o-- User
+
+' Dashboard → Panel (composition)
+UserDashboard *-- BrowseCarsPanel
+UserDashboard *-- MyRentalsPanel
+AdminDashboard *-- ManageCarsPanel
+AdminDashboard *-- ManageRentalsPanel
+AdminDashboard *-- ManageUsersPanel
+
+' Service → Repository
+CarRentalAgency o-- CarRepository
+CarRentalAgency o-- RentalRepository
+
+' Service → Exception
+CarRentalAgency ..> CarRentalException : throws
+
+' Repository → Database
+UserRepository ..> DBConnection : uses
+CarRepository ..> DBConnection : uses
+RentalRepository ..> DBConnection : uses
+
+' Repository → Model
+UserRepository ..> User : manages
+CarRepository ..> Car : manages
+RentalRepository ..> Rental : manages
+
+@enduml
