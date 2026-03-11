@@ -72,6 +72,22 @@ The system follows a clean **3-Layered Architecture** to ensure maintainability 
 2.  **Business Logic Layer (Service)**: Managed by the `CarRentalAgency` class, which handles the core rules of renting and returning vehicles.
 3.  **Data Access Layer (Repository)**: Uses **JDBC** with specialized repository classes (`UserRepository`, `CarRepository`, `RentalRepository`) for efficient database communication.
 
+## Class Diagram
+
+The diagram below covers all 19 classes across 6 packages. Open `class_diagram.puml` with any PlantUML-compatible tool (e.g. [PlantUML Online](https://www.plantuml.com/plantuml/uml/), IntelliJ PlantUML plugin, or VS Code PlantUML extension) to render it.
+
+| Package | Classes |
+|---------|---------|
+| *(entry point)* | `Main` |
+| `model` | `User`, `Car`, `Rental` |
+| `database` | `DBConnection` |
+| `exception` | `CarRentalException` |
+| `repository` | `UserRepository`, `CarRepository`, `RentalRepository` |
+| `service` | `CarRentalAgency` |
+| `ui` | `LoginFrame`, `RegisterFrame`, `UserDashboard`, `AdminDashboard`, `BrowseCarsPanel`, `MyRentalsPanel`, `ManageCarsPanel`, `ManageRentalsPanel`, `ManageUsersPanel` |
+
+> **Note:** The original class diagram included in the project issue showed only 4 classes (`SetBCarRentalSystem`, `CarRentalAgency`, `Car`, `CarRentalException`). The complete program contains 19 classes. See `class_diagram.puml` for the full, up-to-date diagram.
+
 ## Tech Stack
 
 *   **Language**: Java
