@@ -124,7 +124,7 @@ public class RegisterFrame extends JFrame {
             return;
         }
 
-        User newUser = new User(0, name, username, password, "USER");
+        User newUser = new User(0, name, username, password, "CUSTOMER");
         try {
             userRepository.registerUser(newUser);
             JOptionPane.showMessageDialog(this, "Registration successful! You can now log in.", "Registration Success", JOptionPane.INFORMATION_MESSAGE);
